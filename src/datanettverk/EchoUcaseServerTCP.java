@@ -46,7 +46,7 @@ public class EchoUcaseServerTCP {
             // read from the connection socket
             while ((receivedText = in.readLine()) != null) {
                 System.out.println("Client [" + clientAddr.getHostAddress() + ":" + clientPort + "] > " + receivedText);
-                
+
                 String outText = "";
                 String stringCurrency = "";
                 double currency = 0;
@@ -57,60 +57,49 @@ public class EchoUcaseServerTCP {
                     String part1 = split[0];
                     String part2 = split[1];
                     String part3 = split[2];
-                   
+
                     Scanner inFile = new Scanner(new File("C:/Users/Marku/Downloads/conversfinal.csv"));
                     inFile.useDelimiter(",");
                     String test = inFile.next();
-                  
+
                     while (inFile.hasNext() && !(test.equals(part2))) {
-                        System.out.println("wooo if test");
                         test = inFile.next();
                     }
                     if (test.equals(part2)) { // Invalid currency type would get assigned the last string from the while loop, so we need to check.
                         stringCurrency = inFile.next();
                         currency = Double.parseDouble(stringCurrency);
-                        sum = currency*Double.parseDouble(part1);
-                        System.out.println("If-test");
-                        outText = "Sum: " + sum + " " + part3;
-                        out.println(outText);
-                    }
-                    else {
+                        sum = currency * Double.parseDouble(part1);
+
+                        Scanner inFileTwo = new Scanner(new File("C:/Users/Marku/Downloads/conversfinal.csv"));
+                        inFileTwo.useDelimiter(",");
+                        String testTwo = inFileTwo.next();
+
+                        while (inFileTwo.hasNext() && !(testTwo.equals(part3))) {
+                            testTwo = inFileTwo.next();
+                        }
+                        if (testTwo.equals(part3)) {
+                            String stringNewCurrency = inFileTwo.next();
+                            double newCurrency = Double.parseDouble(stringNewCurrency);
+                            double currencyFinal = currency / newCurrency;
+                            sum = currencyFinal * Double.parseDouble(part1);
+                            outText = sum + " " + part2 + " !required! for buying " + part1 + " " + part3;
+                            out.println(outText);
+                        }
+                        inFileTwo.close();
+                    } else {
                         outText = "Error";
                         out.println(outText);
                     }
                     inFile.close();
                 }
-                    /*
-                    int partNumber = Integer.parseInt(inFile.next());
-                    String description = inFile.next();
-                    double price = Double.parseDouble(inFile.next());
-                    String city = inFile.next();
-                    int quantity = Integer.parseInt(inFile.nextLine().replaceAll(",", ""));
-                    if (inFile.hasNextLine()) {
-                        inFile.nextLine();
-                    }
-                   
-                
-                inFile.close(); */
- /* if ("100 nok usd".equals(receivedText)) {
-                    
-                
-                    String split[] = receivedText.split(" ");
-                    outText = "til:" + split[2] + " fra:" + split[1] + " beløp: " + split[0];
-                    out.println(outText);
-                } else {
-                    outText = receivedText.toUpperCase();
-                    // Write the converted uppercase string to the connection socket
-                    out.println(outText);
-                } */
-                    System.out.println("I (Server) [" + connectSocket.getLocalAddress().getHostAddress() + ":" + portNumber + "] > " + outText);
-                }
-                System.out.println("I am done, Bye!");
-            }catch (IOException e) {
+                System.out.println("I (Server) [" + connectSocket.getLocalAddress().getHostAddress() + ":" + portNumber + "] > " + outText);
+            }
+            System.out.println("I am done, Bye!");
+        } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
         }
 
-        }
     }
+}
