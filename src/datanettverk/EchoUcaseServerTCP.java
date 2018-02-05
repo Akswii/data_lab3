@@ -82,7 +82,7 @@ public class EchoUcaseServerTCP {
                             double newCurrency = Double.parseDouble(stringNewCurrency);
                             double currencyFinal = currency / newCurrency;
                             sum = currencyFinal * Double.parseDouble(part1);
-                            outText = sum + " " + part2 + " !required! for buying " + part1 + " " + part3;
+                            outText = sum + " " + part2 + " required for buying " + part1 + " " + part3;
                             out.println(outText);
                         }
                         inFileTwo.close();
