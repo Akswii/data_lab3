@@ -88,7 +88,7 @@ public class EchoUcaseServerTCPMultiClient {
                         String part2 = split[1];
                         String part3 = split[2];
 
-                        Scanner inFile = new Scanner(new File("C:/Users/Marku/Downloads/conversfinal.csv"));
+                        Scanner inFile = new Scanner(new File("C:/Users/aksel/Documents/NetBeansProjects/Datanettverk/src/datanettverk/konversjon.csv"));
                         inFile.useDelimiter(",");
                         String test = inFile.next();
 
@@ -100,7 +100,7 @@ public class EchoUcaseServerTCPMultiClient {
                             currency = Double.parseDouble(stringCurrency);
                             sum = currency * Double.parseDouble(part1);
 
-                            Scanner inFileTwo = new Scanner(new File("C:/Users/Marku/Downloads/conversfinal.csv"));
+                            Scanner inFileTwo = new Scanner(new File("C:/Users/aksel/Documents/NetBeansProjects/Datanettverk/src/datanettverk/konversjon.csv"));
                             inFileTwo.useDelimiter(",");
                             String testTwo = inFileTwo.next();
 
